@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>ES6.x // purple910</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="purple910" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://purple910.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ES6.x"/>
+<meta name="twitter:description" content="类 class Animal{ constructor(name){ this.name=name } Spack(){ console.log(name) } } class Dog extends Animal{ constructor(name,age){ super(name);//子类中如果有constructor,就必须有super this.age=age } Spack(){ super.Spack()//如果没有,则重写Spack方法,有则在Spack中添加内容 console.log(age) } }  模块化 //导出 var name = &#39;Rainbow&#39;; var age = &#39;24&#39;; export {name, age}; 导入 import {name,age} from &#39;来源&#39;;  箭头函数 ()=&gt;1 v=&gt;v&#43;1 (a,b)=&gt;a&#43;b ()=&gt;{ alert(&quot;foo&quot;); } e=&gt;{ if (e == 0){ return 0; } return 1000/e; }  模板字符串 let name=Tom `welcome ${name}`  解构赋值 let [foo, [[bar], baz]] = [1, [[2], 3]]; foo // 1 bar // 2 baz // 3 [x, y = &#39;b&#39;] = [&#39;a&#39;, undefined]; // x=&#39;a&#39;, y=&#39;b&#39; for (let [key, value] of map) { console."/>
+
+    <meta property="og:title" content="ES6.x" />
+<meta property="og:description" content="类 class Animal{ constructor(name){ this.name=name } Spack(){ console.log(name) } } class Dog extends Animal{ constructor(name,age){ super(name);//子类中如果有constructor,就必须有super this.age=age } Spack(){ super.Spack()//如果没有,则重写Spack方法,有则在Spack中添加内容 console.log(age) } }  模块化 //导出 var name = &#39;Rainbow&#39;; var age = &#39;24&#39;; export {name, age}; 导入 import {name,age} from &#39;来源&#39;;  箭头函数 ()=&gt;1 v=&gt;v&#43;1 (a,b)=&gt;a&#43;b ()=&gt;{ alert(&quot;foo&quot;); } e=&gt;{ if (e == 0){ return 0; } return 1000/e; }  模板字符串 let name=Tom `welcome ${name}`  解构赋值 let [foo, [[bar], baz]] = [1, [[2], 3]]; foo // 1 bar // 2 baz // 3 [x, y = &#39;b&#39;] = [&#39;a&#39;, undefined]; // x=&#39;a&#39;, y=&#39;b&#39; for (let [key, value] of map) { console." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://purple910.github.io/post/web-es/" />
+<meta property="article:published_time" content="2019-07-18T16:39:34&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-18T16:39:34&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://purple910.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="purple910" /></a>
+      <h1>purple910</h1>
+      <p>蝴蝶为花醉，花却随风飞，花舞花落泪，花哭花瓣飞，花开为花谢，花谢为谁悲。</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">ES6.x</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 18, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h1 id="类">类</h1>
+
+<pre><code>class Animal{
+    constructor(name){
+        this.name=name
+    }
+    Spack(){
+        console.log(name)
+    }
+}
+class Dog extends Animal{
+    constructor(name,age){
+        super(name);//子类中如果有constructor,就必须有super
+        this.age=age
+    }
+    Spack(){
+        super.Spack()//如果没有,则重写Spack方法,有则在Spack中添加内容
+        console.log(age)
+    }
+}
+</code></pre>
+
+<h1 id="模块化">模块化</h1>
+
+<pre><code>//导出
+var name = 'Rainbow';
+var age = '24';
+export {name, age};
+导入
+import {name,age} from '来源';
+</code></pre>
+
+<h1 id="箭头函数">箭头函数</h1>
+
+<pre><code>()=&gt;1
+v=&gt;v+1
+(a,b)=&gt;a+b
+()=&gt;{
+    alert(&quot;foo&quot;);
+}
+e=&gt;{
+    if (e == 0){
+        return 0;
+    }
+    return 1000/e;
+}
+</code></pre>
+
+<h1 id="模板字符串">模板字符串</h1>
+
+<pre><code>let name=Tom
+`welcome ${name}`
+</code></pre>
+
+<h1 id="解构赋值">解构赋值</h1>
+
+<pre><code>let [foo, [[bar], baz]] = [1, [[2], 3]];
+foo // 1
+bar // 2
+baz // 3
+
+[x, y = 'b'] = ['a', undefined]; // x='a', y='b'
+
+for (let [key, value] of map) {
+  console.log(key + &quot; is &quot; + value);
+}
+</code></pre>
+
+<h1 id="延展操作符">延展操作符</h1>
+
+<pre><code>function sum(x, y, z) {
+  return x + y + z;
+}
+const numbers = [1, 2, 3];
+console.log(sum(...numbers));
+
+let [a,b,...c] = [1,2,3,4,5,6,7,]
+console.log(a,b,c)//1 2 [3,4,5,6,7]
+
+var arr = [1, 2, 3];
+var arr2 = [...arr]; // 等同于 arr.slice()
+
+</code></pre>
+
+<h1 id="promise">Promise</h1>
+
+<pre><code>var promise = new Promise(function(resolve, reject) {
+  // ... some code
+
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+promise.then(function(value) {
+  // success
+}, function(error) {
+  // failure
+});
+promise.then((value) =&gt; {
+  // success
+}, (error) =&gt; {
+  // failure
+});
+promise.then((value) =&gt; {
+  // success
+}).catch((err) =&gt; {
+    //failure
+});
+</code></pre>
+
+<h1 id="generator函数">Generator函数</h1>
+
+<pre><code>function * gen(x){
+  var y = *yield* x + 2;
+  return y;
+}
+
+var g = gen(1);
+g.next() // { value: 3, done: false }
+g.next(2) // { value: 2, done: true }
+</code></pre>
+
+<h1 id="async-await">async/await</h1>
+
+<pre><code>*async* function process(array) {
+  for *await* (let i of array) {
+    doSomething(i);
+  }
+}
+async function process(array) {
+  for await (let i of array) {
+    doSomething(i);
+  }
+}
+</code></pre>
+
+<h1 id="正则">正则</h1>
+
+<pre><code>/foo.bar/.test('foo\nbar')// false
+/foo.bar/s.test('foo\nbar') // true
+
+let str = '2019-07-31'
+let reg = /(\d{4})-(\d{2})-(\d{2})/
+let reg = /(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})-(?&lt;day&gt;\d{2})/
+console.log(str.match(reg).groups)
+
+let reg = /^(?&lt;name&gt;welcome)-\k&lt;name&gt;-\1$/
+let str = welcome-welcome-welcome
+console.log(reg.test(str))
+</code></pre>
+
+<h1 id="proxy">Proxy</h1>
+
+<pre><code>let json = {
+  name,
+  age
+}
+let newJson = new Proxy(json,{
+  set(target,property,value){
+    if(property == 'age'){
+      if(!Number.isInteger(value)){
+        &lt;!-- throw new TypeError('年龄是整数') --&gt;
+        return false
+      }
+    }
+    target[property] = value
+    return true
+  },
+  get(target,property){
+    if(property in target){
+      console.log(`你访问了${property}属性`)
+      return target[property]
+    }else{
+      console.log(`没有这个属性`)
+      return null
+    }
+  },
+  has(target,key){
+    return key in target;
+  },
+  deleteProperty(target,property){
+    return true
+  }
+})
+
+var target = function () { return 'I am the target'; };
+var handler = {
+  apply: function () {
+    return 'I am the proxy';
+  }
+};
+var p = new Proxy(target, handler);
+p()
+
+const DOM = new Proxy({},{
+  get(target,property){
+    return function(attr={},...children){
+      console el = document.createElement(property)
+      for(let key of Object.keys(attr)){
+        el.setAttribute(key,attr[key])
+      }
+      for(let child of children){
+        if(typeof child == 'string'){
+          child = document.createTextNode(child)
+        }
+        el.appendChild(child)
+      }
+      return el
+    }
+  }
+})
+let oDiv = DOM.div(
+  {id:'id1',class:'cl1'},'div','1123',
+  DOM.ul({},
+    DOM.li({},111)
+    DOM.li({},222)
+    DOM.li({},333)
+  )
+)
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

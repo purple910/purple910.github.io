@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-basic/</loc>
+    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/</loc>
+    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/</loc>
+    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/qt-1/</loc>
+    <lastmod>2019-07-18T19:52:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/vs-1/</loc>
+    <lastmod>2019-07-18T19:51:42+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/sqlserver-2/</loc>
+    <lastmod>2019-07-18T19:51:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/web-es/</loc>
+    <lastmod>2019-07-18T16:39:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/web-particle/</loc>
+    <lastmod>2019-07-18T16:39:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/sqlserver-1/</loc>
+    <lastmod>2019-07-17T14:24:55+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

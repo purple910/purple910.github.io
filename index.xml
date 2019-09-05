@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>purple910</title>
+    <link>https://purple910.github.io/</link>
+    <description>Recent content on purple910</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 28 Aug 2019 16:18:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://purple910.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux Basic</title>
+      <link>https://purple910.github.io/post/linux-basic/</link>
+      <pubDate>Wed, 28 Aug 2019 16:18:20 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-basic/</guid>
+      <description>设置随机密码： openssl rand -base64 16 | passwd &amp;ndash;stdin root lab rootpw setup
+rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo redhat|passwd root touch /.autorelabel exit exit reboot</description>
+    </item>
+    
+    <item>
+      <title>Qt 1</title>
+      <link>https://purple910.github.io/post/qt-1/</link>
+      <pubDate>Thu, 18 Jul 2019 19:52:00 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/qt-1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vs 1</title>
+      <link>https://purple910.github.io/post/vs-1/</link>
+      <pubDate>Thu, 18 Jul 2019 19:51:42 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/vs-1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>连接 Sqlserver</title>
+      <link>https://purple910.github.io/post/sqlserver-2/</link>
+      <pubDate>Thu, 18 Jul 2019 19:51:15 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/sqlserver-2/</guid>
+      <description>java连接sqlserver 1 创建 Dynamic Web Project项目 在WebContent/WEB-INF/lib中添加sqljdbc42.jar 2 在class文件里连接数据库 Class.forName(&amp;quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&amp;quot;); String url = &amp;quot;jdbc:sqlserver://localhost:1433;databaseName = text&amp;quot;; String a = &amp;quot;sa&amp;quot;; String b = &amp;quot;admin&amp;quot;; Connection conn=DriverManager.getConnection(url,&amp;quot;sa&amp;quot;,&amp;quot;admin&amp;quot;); PreparedStatement pstat = conn.prepareStatement(sql); ResultSet rs = pstat.executeQuery(); --------------------------------------------------------- Statement stat = conn.createStatement(); ResultSet rs = stat.executeQuery(sql);  Spring中连接sqlserver 1 添加sqljdbc.jarjiabao &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.microsoft.sqlserver&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;sqljdbc4&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.2&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 2 在配置文件中连接数据库(application.yml) spring: datasource: url: jdbc:sqlserver://localhost:1433;DatabaseName=practice driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver username: sa password: admin 3 操作数据库 @Autowired JdbcTemplate jdbcTemplate; public List&amp;lt;StudentBean&amp;gt; getStudentByRubric(String id){ List&amp;lt;StudentBean&amp;gt; user = jdbcTemplate.</description>
+    </item>
+    
+    <item>
+      <title>ES6.x</title>
+      <link>https://purple910.github.io/post/web-es/</link>
+      <pubDate>Thu, 18 Jul 2019 16:39:34 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/web-es/</guid>
+      <description>类 class Animal{ constructor(name){ this.name=name } Spack(){ console.log(name) } } class Dog extends Animal{ constructor(name,age){ super(name);//子类中如果有constructor,就必须有super this.age=age } Spack(){ super.Spack()//如果没有,则重写Spack方法,有则在Spack中添加内容 console.log(age) } }  模块化 //导出 var name = &#39;Rainbow&#39;; var age = &#39;24&#39;; export {name, age}; 导入 import {name,age} from &#39;来源&#39;;  箭头函数 ()=&amp;gt;1 v=&amp;gt;v+1 (a,b)=&amp;gt;a+b ()=&amp;gt;{ alert(&amp;quot;foo&amp;quot;); } e=&amp;gt;{ if (e == 0){ return 0; } return 1000/e; }  模板字符串 let name=Tom `welcome ${name}`  解构赋值 let [foo, [[bar], baz]] = [1, [[2], 3]]; foo // 1 bar // 2 baz // 3 [x, y = &#39;b&#39;] = [&#39;a&#39;, undefined]; // x=&#39;a&#39;, y=&#39;b&#39; for (let [key, value] of map) { console.</description>
+    </item>
+    
+    <item>
+      <title>粒子漩涡</title>
+      <link>https://purple910.github.io/post/web-particle/</link>
+      <pubDate>Thu, 18 Jul 2019 16:39:34 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/web-particle/</guid>
+      <description>function project3D(x,y,z,vars){ var p,d; x-=vars.camX; y-=vars.camY-8; z-=vars.camZ; p=Math.atan2(x,z); d=Math.sqrt(x*x+z*z); x=Math.sin(p-vars.yaw)*d; z=Math.cos(p-vars.yaw)*d; p=Math.atan2(y,z); d=Math.sqrt(y*y+z*z); y=Math.sin(p-vars.pitch)*d; z=Math.cos(p-vars.pitch)*d; var rx1=-1000; var ry1=1; var rx2=1000; var ry2=1; var rx3=0; var ry3=0; var rx4=x; var ry4=z; var uc=(ry4-ry3)*(rx2-rx1)-(rx4-rx3)*(ry2-ry1); var ua=((rx4-rx3)*(ry1-ry3)-(ry4-ry3)*(rx1-rx3))/uc; var ub=((rx2-rx1)*(ry1-ry3)-(ry2-ry1)*(rx1-rx3))/uc; if(!z)z=0.000000001; if(ua0&amp;&amp;ua0&amp;&amp;ub=-1 &amp;&amp; z/dist vars.vortexHeight/2 || d0) { vars.ctx.fillStyle = colorString(interpolateColors(rgbArray(d/26-vars.frameNo/40),[0,128,32],.5+Math.sin(d/6-vars.frameNo/8)/2)); vars.ctx.globalAlpha = a; vars.ctx.fillRect(point.x-size/2,point.y-size/2,size,size); } } } } vars.ctx.fillStyle = &#34;#82f&#34;; for (var i = -25; i 0) { vars.ctx.fillStyle = colorString(interpolateColors(rgbArray(-d/26-vars.</description>
+    </item>
+    
+    <item>
+      <title>SQLServer</title>
+      <link>https://purple910.github.io/post/sqlserver-1/</link>
+      <pubDate>Wed, 17 Jul 2019 14:24:55 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/sqlserver-1/</guid>
+      <description>去除数据库登录界面的所有用户信息 C:\Users\asus\AppData\Roaming\Microsoft\SQL Server Management Studio\14.0\SqlStudio.bin  查询姓名中第二个字与第三个字相同: select * from Student s2 where SUBSTRING(s2.sname,2,1)=SUBSTRING(s2.sname,3,1)  用户授权 1 创建用户
+create login names with password=&#39;pwd&#39; , default_database=test; create user names for login names with default_schema=dbo;  2 增删改查授权
+grant select,insert,UPDATE,DELETE on 表 to names  3 创建表
+grant create table to names GRANT ALTER ON SCHEMA::dbo TO names;  4 存储过程授权
+GRANT EXECUTE ON 存储过程名 TO username  5 禁止对表授权
+DENY UPDATE ON 表 TO username CASCADE;  6 回收权限</description>
+    </item>
+    
+  </channel>
+</rss>
