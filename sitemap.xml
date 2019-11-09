@@ -3,20 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://purple910.github.io/post/linux-basic/</loc>
-    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
+    <loc>https://purple910.github.io/post/</loc>
+    <lastmod>2019-11-09T14:58:38+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://purple910.github.io/post/</loc>
-    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
-    <priority>0</priority>
+    <loc>https://purple910.github.io/post/linux-directive/</loc>
+    <lastmod>2019-11-09T14:58:38+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://purple910.github.io/</loc>
-    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
+    <lastmod>2019-11-09T14:58:38+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/resouce/</loc>
+    <lastmod>2019-09-16T15:53:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-basic/</loc>
+    <lastmod>2019-08-28T16:18:20+08:00</lastmod>
   </url>
   
   <url>

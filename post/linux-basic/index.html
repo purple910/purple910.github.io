@@ -12,12 +12,10 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux Basic"/>
-<meta name="twitter:description" content="设置随机密码： openssl rand -base64 16 | passwd &ndash;stdin root lab rootpw setup
-rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo redhat|passwd root touch /.autorelabel exit exit reboot"/>
+<meta name="twitter:description" content=" 设置随机密码： openssl rand -base64 16 | passwd --stdin root lab rootpw setup rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo redhat|passwd root touch /.autorelabel exit exit reboot  "/>
 
     <meta property="og:title" content="Linux Basic" />
-<meta property="og:description" content="设置随机密码： openssl rand -base64 16 | passwd &ndash;stdin root lab rootpw setup
-rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo redhat|passwd root touch /.autorelabel exit exit reboot" />
+<meta property="og:description" content=" 设置随机密码： openssl rand -base64 16 | passwd --stdin root lab rootpw setup rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo redhat|passwd root touch /.autorelabel exit exit reboot  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://purple910.github.io/post/linux-basic/" />
 <meta property="article:published_time" content="2019-08-28T16:18:20&#43;08:00"/>
@@ -56,19 +54,23 @@ rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo
         </div></div>
     </header>
     <div class="post-content">
-      <p>设置随机密码：
-openssl rand -base64 16 | passwd &ndash;stdin root
-lab rootpw setup</p>
+      
 
-<p>rd.break
+<h1 id="设置随机密码">设置随机密码：</h1>
+
+<pre><code>openssl rand -base64 16 | passwd --stdin root
+lab rootpw setup
+
+rd.break
 mount
 mount -o remount,rw /sysroot
 chroot /sysroot/
 passwd root ===echo redhat|passwd root
-touch /.autorelabel
+touch /.autorelabel 
 exit
 exit
-reboot</p>
+reboot
+</code></pre>
 
     </div>
     <div class="post-footer">
