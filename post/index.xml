@@ -6,10 +6,38 @@
     <description>Recent content in Posts on purple910</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Nov 2019 14:58:38 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 Nov 2019 19:49:21 +0800</lastBuildDate>
     
 	<atom:link href="https://purple910.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Demo</title>
+      <link>https://purple910.github.io/post/linux-demo/</link>
+      <pubDate>Tue, 12 Nov 2019 19:49:21 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-demo/</guid>
+      <description>重置密码 1 设置随机密码
+openssl rand -base64 16 | passwd --stdin root lab rootpw setup  2 重启,在开机时按F2
+3 在加载linux内核的地方添加
+rd.break  4 查看/sysroot的挂载情况
+mount  5 用读写的方式挂载
+mount -o remount,rw /sysroot  6 进入linux终端
+chroot /sysroot/  7 修改密码
+1 passwd root 2 echo redhat|passwd --stdin root  8 添加启动扫描文件 touch /.autorelabel 9 重启
+exit exit reboot  Samba共享文件 1 安装samba
+yum install -y samba*  2 添加用户
+useradd smbuser  3 设置共享文件用户的密码</description>
+    </item>
+    
+    <item>
+      <title>Linux Error</title>
+      <link>https://purple910.github.io/post/linux-error/</link>
+      <pubDate>Mon, 11 Nov 2019 09:30:17 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-error/</guid>
+      <description> 1.虚拟机ping不同主机，但主机可以ping同虚拟机，则是主机开启了防火墙，屏蔽了相连接主机的ip </description>
+    </item>
     
     <item>
       <title>linux 指令</title>
@@ -17,7 +45,7 @@
       <pubDate>Sat, 09 Nov 2019 14:58:38 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-directive/</guid>
-      <description>gpasswd 1、gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 2、选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员才可以用newgrp加入该组。 3、实例： 将userA添加到groupB用户组里面： passwd -a userA groupB 注意： 添加用户到某一个组可以使用 usermod -G groupB userA 这个命令可以添加一个用户到指定的组，但是以前添加的组就会清空掉。 所以想要添加一个用户到一个组，同时保留以前添加的组时，请使用gpasswd这个命令来添加操作用户。  acl 1、查看是否支持acl dumpe2fs -h /dev/sda3 2、开启acl支持 mount -o remount, acl [mount point] 3、类型 user::rw- 定义了ACL_USER_OBJ, 说明file owner拥有read and write permission user:john:rw- 定义了ACL_USER,这样用户john就拥有了对文件的读写权限,实现了我们一开始要达到的目的 group::rw- 定义了ACL_GROUP_OBJ,说明文件的group拥有read and write permission group:dev:r-- 定义了ACL_GROUP,使得dev组拥有了对文件的read permission mask::rw- 定义了ACL_MASK的权限为read and write other::r-- 定义了ACL_OTHER的权限为read  setfacl 1、chmod命令可以把文件权限分为u,g,o三个组,而setfacl可以对每一个文件或目录设置更精确的文件权限。 换句话说，setfacl可以更精确的控制权限的分配。 ACL可以针对单一用户、单一文件或目录来进行r,w,x的权限控制 2、选项详解 -m, --modify-acl 更改文件的访问控制列表 -M, --modify-file=file 从文件读取访问控制列表条目更改 -x, --remove=acl 根据文件中访问控制列表移除条目 -X, --remove-file=file 从文件读取访问控制列表条目并删除 -b, --remove-all 删除所有扩展访问控制列表条目 -k, --remove-default 移除默认访问控制列表 --set=acl 设定替换当前的文件访问控制列表 --set-file=file 从文件中读取访问控制列表条目设定 --mask 重新计算有效权限掩码 -n, --no-mask 不重新计算有效权限掩码 -d, --default 应用到默认访问控制列表的操作 -R, --recursive 递归操作子目录 -L, --logical 依照系统逻辑，跟随符号链接 -P, --physical 依照自然逻辑，不跟随符号链接 --restore=file 恢复访问控制列表，和“getfacl -R”作用相反 --test 测试模式，并不真正修改访问控制列表属性 3、实例 setfacl -m u:tank:rx test #给tank用户向test文件增加读和执行的acl规则 setfacl -m u::rwx test #设置默认用户，读，写，可执行 setfacl -m d:u:tank:r-x text #设置tank用户的默认权限r-x setfacl -b test #清除所有acl setfacl -x u:tank test #清除tank用户，对test文件acl规则  getfacl getfacl acl_test1 # file: acl_test1 &amp;lt;==说明档名而已！ # owner: root &amp;lt;==说明此档案的拥有者，亦即ls -l看到的第三使用者栏位 # group: root &amp;lt;==此档案的所属群组，亦即ls -l看到的第四群组栏位 user::rwx &amp;lt;==使用者列表栏是空的，代表档案拥有者的权限 user:vbird1:rx &amp;lt;==针对vbird1的权限设定为rx ，与拥有者并不同！ group::r-- &amp;lt;==针对档案群组的权限设定仅有r mask::rx &amp;lt;==此档案预设的有效权限(mask) other::r-- &amp;lt;==其他人拥有的权限啰！  rpm rpm -ivh package.</description>
+      <description>gpasswd 1、gpasswd命令是Linux下工作组文件/etc/group和/etc/gshadow的管理工具，用于指定要管理的工作组。 2、选项详解： -a : 添加用户到组 -d : 从组删除用户 -A：指定管理员 -M：指定组成员和-A的用途差不多； -r：删除密码； -R：限制用户登入组，只有组中的成员才可以用newgrp加入该组。 3、实例： 将userA添加到groupB用户组里面： passwd -a userA groupB 注意： 添加用户到某一个组可以使用 usermod -G groupB userA 这个命令可以添加一个用户到指定的组，但是以前添加的组就会清空掉。 所以想要添加一个用户到一个组，同时保留以前添加的组时，请使用gpasswd这个命令来添加操作用户。  acl 1、查看是否支持acl dumpe2fs -h /dev/sda3 2、开启acl支持 mount -o remount, acl [mount point] 3、类型 user::rw- 定义了ACL_USER_OBJ, 说明file owner拥有read and write permission user:john:rw- 定义了ACL_USER,这样用户john就拥有了对文件的读写权限,实现了我们一开始要达到的目的 group::rw- 定义了ACL_GROUP_OBJ,说明文件的group拥有read and write permission group:dev:r-- 定义了ACL_GROUP,使得dev组拥有了对文件的read permission mask::rw- 定义了ACL_MASK的权限为read and write other::r-- 定义了ACL_OTHER的权限为read  setfacl 1、chmod命令可以把文件权限分为u,g,o三个组,而setfacl可以对每一个文件或目录设置更精确的文件权限。 换句话说，setfacl可以更精确的控制权限的分配。 ACL可以针对单一用户、单一文件或目录来进行r,w,x的权限控制 2、选项详解 -m, --modify-acl 更改文件的访问控制列表 -M, --modify-file=file 从文件读取访问控制列表条目更改 -x, --remove=acl 根据文件中访问控制列表移除条目 -X, --remove-file=file 从文件读取访问控制列表条目并删除 -b, --remove-all 删除所有扩展访问控制列表条目 -k, --remove-default 移除默认访问控制列表 --set=acl 设定替换当前的文件访问控制列表 --set-file=file 从文件中读取访问控制列表条目设定 --mask 重新计算有效权限掩码 -n, --no-mask 不重新计算有效权限掩码 -d, --default 应用到默认访问控制列表的操作 -R, --recursive 递归操作子目录 -L, --logical 依照系统逻辑，跟随符号链接 -P, --physical 依照自然逻辑，不跟随符号链接 --restore=file 恢复访问控制列表，和“getfacl -R”作用相反 --test 测试模式，并不真正修改访问控制列表属性 3、实例 setfacl -m u:tank:rx test #给tank用户向test文件增加读和执行的acl规则 setfacl -m u::rwx test #设置默认用户，读，写，可执行 setfacl -m d:u:tank:r-x text #设置tank用户的默认权限r-x setfacl -b test #清除所有acl setfacl -x u:tank test #清除tank用户，对test文件acl规则  getfacl getfacl acl_test1 # file: acl_test1 &amp;lt;==说明档名而已！ # owner: root &amp;lt;==说明此档案的拥有者，亦即ls -l看到的第三使用者栏位 # group: root &amp;lt;==此档案的所属群组，亦即ls -l看到的第四群组栏位 user::rwx &amp;lt;==使用者列表栏是空的，代表档案拥有者的权限 user:vbird1:rx &amp;lt;==针对vbird1的权限设定为rx ，与拥有者并不同！ group::r-- &amp;lt;==针对档案群组的权限设定仅有r mask::rx &amp;lt;==此档案预设的有效权限(mask) other::r-- &amp;lt;==其他人拥有的权限啰！    rpm rpm -ivh package.</description>
     </item>
     
     <item>
@@ -35,7 +63,7 @@
       <pubDate>Wed, 28 Aug 2019 16:18:20 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-basic/</guid>
-      <description> 设置随机密码： openssl rand -base64 16 | passwd --stdin root lab rootpw setup rd.break mount mount -o remount,rw /sysroot chroot /sysroot/ passwd root ===echo redhat|passwd root touch /.autorelabel exit exit reboot  </description>
+      <description>控制进程和守护服务 //查看进程是否在运行 systemctl status rsyslog //查看进程是否开机启动 systemctl is-enable rsyslog.service //如果不是 systemctl enable rsyslog  网络配置 //查看网络设备 nmcli device status //查看连接列表 nmcli connection show //查看接口配置 ip addr show [ens33] //新建网络连接 nmcli connection add con-name ens160 type ethernet ifname 网关 ipv4.addresses 192.168.0.5/24 gw4 192.168.1.254 ipv4.dns 8.8.8.8 //更换连接 nmcli connection up ens160 //停止网络接口 nmcli device disable ens160 //修改网络连接 nmcli connection modify ens160 ipv4.addresses &amp;quot;192.168.1.2/24 192.168.1.254&amp;quot; //添加dns nmcli connection modify ens160 +ipv4.dns 192.168.1.1 //更改主机名 hostnamectl localhost //配置网关别名 echo &amp;quot;192.</description>
     </item>
     
     <item>
