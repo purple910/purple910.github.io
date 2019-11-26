@@ -3,20 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://purple910.github.io/post/linux-shell/</loc>
-    <lastmod>2019-11-14T20:26:47+08:00</lastmod>
+    <loc>https://purple910.github.io/post/linux-httpd/</loc>
+    <lastmod>2019-11-26T16:45:18+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://purple910.github.io/post/</loc>
-    <lastmod>2019-11-14T20:26:47+08:00</lastmod>
+    <lastmod>2019-11-26T16:45:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://purple910.github.io/</loc>
-    <lastmod>2019-11-14T20:26:47+08:00</lastmod>
+    <lastmod>2019-11-26T16:45:18+08:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-samba/</loc>
+    <lastmod>2019-11-26T16:44:32+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-openvpn/</loc>
+    <lastmod>2019-11-26T12:37:06+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-l2tp/</loc>
+    <lastmod>2019-11-26T12:36:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-pptpd/</loc>
+    <lastmod>2019-11-26T12:36:17+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://purple910.github.io/post/linux-shell/</loc>
+    <lastmod>2019-11-14T20:26:47+08:00</lastmod>
   </url>
   
   <url>

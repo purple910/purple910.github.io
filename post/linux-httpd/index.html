@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Linux Apache源码安装 // purple910</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="purple910" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://purple910.github.io/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Apache源码安装"/>
+<meta name="twitter:description" content="1 下载安装包
+apr-1.7.0.tar.gz apr-util-1.6.1.tar.gz pcre-8.43.tar.gz httpd-2.4.41.tar.gz https://github.com/purple910/Linux  2 解压
+tar -zxf apr-1.7.0.tar.gz tar -zxf apr-util-1.6.1.tar.gz tar -zxf pcre-8.43.tar.gz tar -zxf httpd-2.4.41.tar.gz  3 添加httpd对于apr,apr-util,pcre的依赖
+cp -r apr-1.7.0 httpd-2.4.41/srclib/apr cp -r util-1.6.1 httpd-2.4.41/srclib/apr-util cp -r pcre-8.43 httpd-2.4.41/srclib/pcre  4 安装apr
+cd apr-1.7.0 gedit configure(将 $RM &quot;$cfgfile&quot; 注释掉) ./configure --prefix=/usr/local/src/apr make &amp;&amp; make install  5 安装apr-util
+cd .././apr-util-1.6.1 ./configure –prefix=/usr/local/src/apr-util –with-apr=/usr/local/src/apr make &amp;&amp; make install (如果报错 缺少expat.h) yum install -y expat-devel."/>
+
+    <meta property="og:title" content="Linux Apache源码安装" />
+<meta property="og:description" content="1 下载安装包
+apr-1.7.0.tar.gz apr-util-1.6.1.tar.gz pcre-8.43.tar.gz httpd-2.4.41.tar.gz https://github.com/purple910/Linux  2 解压
+tar -zxf apr-1.7.0.tar.gz tar -zxf apr-util-1.6.1.tar.gz tar -zxf pcre-8.43.tar.gz tar -zxf httpd-2.4.41.tar.gz  3 添加httpd对于apr,apr-util,pcre的依赖
+cp -r apr-1.7.0 httpd-2.4.41/srclib/apr cp -r util-1.6.1 httpd-2.4.41/srclib/apr-util cp -r pcre-8.43 httpd-2.4.41/srclib/pcre  4 安装apr
+cd apr-1.7.0 gedit configure(将 $RM &quot;$cfgfile&quot; 注释掉) ./configure --prefix=/usr/local/src/apr make &amp;&amp; make install  5 安装apr-util
+cd .././apr-util-1.6.1 ./configure –prefix=/usr/local/src/apr-util –with-apr=/usr/local/src/apr make &amp;&amp; make install (如果报错 缺少expat.h) yum install -y expat-devel." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://purple910.github.io/post/linux-httpd/" />
+<meta property="article:published_time" content="2019-11-26T16:45:18&#43;08:00"/>
+<meta property="article:modified_time" content="2019-11-26T16:45:18&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://purple910.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="purple910" /></a>
+      <h1>purple910</h1>
+      <p>蝴蝶为花醉，花却随风飞，花舞花落泪，花哭花瓣飞，花开为花谢，花谢为谁悲。</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Linux Apache源码安装</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Nov 26, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <p>1 下载安装包</p>
+
+<pre><code>apr-1.7.0.tar.gz
+apr-util-1.6.1.tar.gz
+pcre-8.43.tar.gz
+httpd-2.4.41.tar.gz
+https://github.com/purple910/Linux
+</code></pre>
+
+<p>2 解压</p>
+
+<pre><code>tar -zxf apr-1.7.0.tar.gz
+tar -zxf apr-util-1.6.1.tar.gz
+tar -zxf pcre-8.43.tar.gz
+tar -zxf httpd-2.4.41.tar.gz
+</code></pre>
+
+<p>3 添加httpd对于apr,apr-util,pcre的依赖</p>
+
+<pre><code>cp -r apr-1.7.0 httpd-2.4.41/srclib/apr
+cp -r util-1.6.1 httpd-2.4.41/srclib/apr-util
+cp -r pcre-8.43 httpd-2.4.41/srclib/pcre
+</code></pre>
+
+<p>4 安装apr</p>
+
+<pre><code>cd apr-1.7.0
+gedit configure(将 $RM &quot;$cfgfile&quot; 注释掉)
+./configure --prefix=/usr/local/src/apr
+make &amp;&amp; make install
+</code></pre>
+
+<p>5 安装apr-util</p>
+
+<pre><code>cd .././apr-util-1.6.1
+./configure –prefix=/usr/local/src/apr-util –with-apr=/usr/local/src/apr
+make &amp;&amp; make install
+(如果报错 缺少expat.h)
+yum install -y expat-devel.x86_64
+</code></pre>
+
+<p>6 安装prce</p>
+
+<pre><code>cd .././ pcre-8.43
+./configure –prefix=/usr/local/src/pcre
+make &amp;&amp; make install
+</code></pre>
+
+<p>7 安装httpd</p>
+
+<pre><code>cd .././ httpd-2.4.41
+./configure --with-included-apr --sysconfdir=/etc/httpd --prefix=/usr/local/src/apache2.4 --with-apr=/usr/local/src/apr --with-apr-util=/usr/local/src/apr-util --with-pcre=/usr/local/src/pcre --enable-so --enable-unixd --enable-rewrite
+make &amp;&amp; make install
+</code></pre>
+
+<p>8 关闭防火墙</p>
+
+<pre><code>server firewall stop
+</code></pre>
+
+<p>9 编辑httpd的配置文件</p>
+
+<pre><code>vim /etc/httpd/httpd.conf
+#ServerName www.example.com:80
+ServerName 172.0.0.1:80
+</code></pre>
+
+<p>10 添加apache的快捷方式</p>
+
+<pre><code>cp /usr/local/src/apache2.4/bin/apachectl  /etc/init.d/httpd
+ln -s /etc/init.d/httpd /etc/rc.d/S85httpd
+</code></pre>
+
+<p>11 修改httpd</p>
+
+<pre><code> vim /etc/rc.d/init.d/httpd
+# chkconfig: 345 85 15
+# description: Activates/Deactivates Apache Web Server
+</code></pre>
+
+<p>12 运行httpd</p>
+
+<pre><code>server httpd start
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name,using localhost.localdomain. Set the 'ServerName' directive globally to suppress this message
+</code></pre>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

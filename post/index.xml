@@ -6,10 +6,65 @@
     <description>Recent content in Posts on purple910</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Nov 2019 20:26:47 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 16:45:18 +0800</lastBuildDate>
     
 	<atom:link href="https://purple910.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Apache源码安装</title>
+      <link>https://purple910.github.io/post/linux-httpd/</link>
+      <pubDate>Tue, 26 Nov 2019 16:45:18 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-httpd/</guid>
+      <description>1 下载安装包
+apr-1.7.0.tar.gz apr-util-1.6.1.tar.gz pcre-8.43.tar.gz httpd-2.4.41.tar.gz https://github.com/purple910/Linux  2 解压
+tar -zxf apr-1.7.0.tar.gz tar -zxf apr-util-1.6.1.tar.gz tar -zxf pcre-8.43.tar.gz tar -zxf httpd-2.4.41.tar.gz  3 添加httpd对于apr,apr-util,pcre的依赖
+cp -r apr-1.7.0 httpd-2.4.41/srclib/apr cp -r util-1.6.1 httpd-2.4.41/srclib/apr-util cp -r pcre-8.43 httpd-2.4.41/srclib/pcre  4 安装apr
+cd apr-1.7.0 gedit configure(将 $RM &amp;quot;$cfgfile&amp;quot; 注释掉) ./configure --prefix=/usr/local/src/apr make &amp;amp;&amp;amp; make install  5 安装apr-util
+cd .././apr-util-1.6.1 ./configure –prefix=/usr/local/src/apr-util –with-apr=/usr/local/src/apr make &amp;amp;&amp;amp; make install (如果报错 缺少expat.h) yum install -y expat-devel.</description>
+    </item>
+    
+    <item>
+      <title>Linux Samba共享文件</title>
+      <link>https://purple910.github.io/post/linux-samba/</link>
+      <pubDate>Tue, 26 Nov 2019 16:44:32 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-samba/</guid>
+      <description>1 安装samba
+yum install -y samba*  2 添加用户
+useradd smbuser  3 设置共享文件用户的密码
+smbpasswd -a smbuser  4 创建公共共享文件
+mkdir /home/share chmod 777 /home/share  5 修改smb的配置文件
+vim /etc/samba/smb.conf # max protocol = used to define the supported protocol. The default is NT1. # can set it to SMB2 if you want experimental SMB2 support. workgroup = MYGROUP server string = Samba Server Version %v ; netbios name = MYSERVER ; interfaces = lo eth0 ens160 192.</description>
+    </item>
+    
+    <item>
+      <title>Linux Openvpn</title>
+      <link>https://purple910.github.io/post/linux-openvpn/</link>
+      <pubDate>Tue, 26 Nov 2019 12:37:06 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-openvpn/</guid>
+      <description> 软件安装 基本配置文件 生成服务端证书 生成客户端证书 证书整理 server.conf 密码验证脚本 pwd-file 防火墙 client.ovpn 连接 </description>
+    </item>
+    
+    <item>
+      <title>Linux L2tp</title>
+      <link>https://purple910.github.io/post/linux-l2tp/</link>
+      <pubDate>Tue, 26 Nov 2019 12:36:58 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-l2tp/</guid>
+      <description> 软件安装 xl2tpd.conf ipsec.conf l2tp-ipsec.conf chap-secrets default-secrets sysctl.conf 防火墙 主机连接 </description>
+    </item>
+    
+    <item>
+      <title>Linux Pptpd</title>
+      <link>https://purple910.github.io/post/linux-pptpd/</link>
+      <pubDate>Tue, 26 Nov 2019 12:36:17 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-pptpd/</guid>
+      <description> 软件安装 pptpd.conf options.pptpd chap-secrets sysctl.conf 防火墙 主机连接 </description>
+    </item>
     
     <item>
       <title>Linux Shell</title>
@@ -21,22 +76,21 @@
     </item>
     
     <item>
-      <title>Linux Demo</title>
+      <title>Linux 重置密码</title>
       <link>https://purple910.github.io/post/linux-demo/</link>
       <pubDate>Tue, 12 Nov 2019 19:49:21 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-demo/</guid>
-      <description>重置密码 1 设置随机密码
+      <description>1 设置随机密码
 openssl rand -base64 16 | passwd --stdin root lab rootpw setup  2 重启,在开机时按F2
 3 在加载linux内核的地方添加
 rd.break  4 查看/sysroot的挂载情况
 mount  5 用读写的方式挂载
 mount -o remount,rw /sysroot  6 进入linux终端
 chroot /sysroot/  7 修改密码
-1 passwd root 2 echo redhat|passwd --stdin root  8 添加启动扫描文件 touch /.autorelabel 9 重启
-exit exit reboot  Samba共享文件 1 安装samba
-yum install -y samba*  2 添加用户
-useradd smbuser  3 设置共享文件用户的密码</description>
+1 passwd root 2 echo redhat|passwd --stdin root  8 添加启动扫描文件
+touch /.autorelabel  9 重启
+exit exit reboot  </description>
     </item>
     
     <item>
@@ -45,7 +99,7 @@ useradd smbuser  3 设置共享文件用户的密码</description>
       <pubDate>Mon, 11 Nov 2019 09:30:17 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-error/</guid>
-      <description> 1.虚拟机ping不同主机，但主机可以ping同虚拟机，则是主机开启了防火墙，屏蔽了相连接主机的ip </description>
+      <description> 1.虚拟机ping不同主机，但主机可以ping同虚拟机，则是主机开启了防火墙，屏蔽了相连接主机的ip fdisk 加载创建的分区 1.reboot 2.partx -a /dev/sdb  </description>
     </item>
     
     <item>
