@@ -6,10 +6,19 @@
     <description>Recent content in Posts on purple910</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Nov 2019 16:45:18 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 21:29:57 +0800</lastBuildDate>
     
 	<atom:link href="https://purple910.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Dns</title>
+      <link>https://purple910.github.io/post/linux-dns/</link>
+      <pubDate>Tue, 26 Nov 2019 21:29:57 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/linux-dns/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Linux Apache源码安装</title>
@@ -45,7 +54,7 @@ vim /etc/samba/smb.conf # max protocol = used to define the supported protocol. 
       <pubDate>Tue, 26 Nov 2019 12:37:06 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-openvpn/</guid>
-      <description> 软件安装 基本配置文件 生成服务端证书 生成客户端证书 证书整理 server.conf 密码验证脚本 pwd-file 防火墙 client.ovpn 连接 </description>
+      <description>准备环境 1 主机ip:192.168.0.104 2 VPN服务器: ens32:192.168.0.107 ens33:127.16.1.10  软件安装 yum install -y openssl openssl-devel lzo lzo-devel pam pam-devel automake pkgconfig yum -y install openvpn easy-rsa ##配置阿里云的yum源 注：这里的easy-rsa是3.0版本的与2.0版本的配置有所区别  服务端基本配置文件 [root@localhost ~]# cp -r /usr/share/easy-rsa/ /etc/openvpn/easy-rsa [root@localhost ~]# cd /etc/openvpn/easy-rsa/ [root@localhost easy-rsa]# \rm 3 3.0 [root@localhost easy-rsa]# cd 3.0.6/ [root@localhost easy-rsa]# cp -r /usr/share/doc/easy-rsa-3.0.6/vars.example vars 注：若vars.example不在/usr/share/doc/easy-rsa-3.0.6里则可以通过查找文件 find / -type f -name &amp;quot;vars.example&amp;quot; | xargs -i cp {} . &amp;amp;&amp;amp; mv vars.</description>
     </item>
     
     <item>
@@ -54,7 +63,7 @@ vim /etc/samba/smb.conf # max protocol = used to define the supported protocol. 
       <pubDate>Tue, 26 Nov 2019 12:36:58 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-l2tp/</guid>
-      <description> 软件安装 xl2tpd.conf ipsec.conf l2tp-ipsec.conf chap-secrets default-secrets sysctl.conf 防火墙 主机连接 </description>
+      <description>准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 modprobe ppp-compress-18 &amp;amp;&amp;amp; echo yes cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] [lns default] ip range = 172.16.1.100-172.16.1.199 local ip = 172.16.1.10 require chap = yes refuse pap = yes require authentication = yes name = LinuxVPNserver ppp debug = yes pppoptfile = /etc/ppp/options.</description>
     </item>
     
     <item>
@@ -63,7 +72,7 @@ vim /etc/samba/smb.conf # max protocol = used to define the supported protocol. 
       <pubDate>Tue, 26 Nov 2019 12:36:17 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-pptpd/</guid>
-      <description> 软件安装 pptpd.conf options.pptpd chap-secrets sysctl.conf 防火墙 主机连接 </description>
+      <description>准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  软件安装 [root@localhost ~]# yum install -y ppp pptpd 注意:若无法下载pptpd 1 配置阿里云的yum源 2 手动下载pptpd.rpm http:##poptop.sourceforge.net/yum/stable/packages/  pptpd.conf [root@localhost ~]# vim /etc/pptpd.conf	##编辑pptpd的默认匹配文件 option /etc/ppp/options.pptpd logwtmp localip 192.168.0.102	##这个ip为虚拟机的ip地址，也就是我们在linux中用ifconfig查询出来的ip remoteip 172.16.1.20-80	##自动分配ip范围，这里不要包含虚拟机的ip，否则会发生冲突 ##说明：localip 是本机的外网IP地址；remoteip 是为接入的VPN客户端分配的IP地址范围。  options.pptpd [root@localhost ~]# vim /etc/ppp/options.pptpd ##有效行：如果此文件为空，添加这些行就可以 name pptpd ##相当于身份验证时的域，一定要和/etc/ppp/chap-secrets中的内容对应 refuse-pap ##拒绝pap身份验证 refuse-chap ##拒绝chap身份验证 refuse-mschap ##拒绝mschap身份验证 require-mschap-v2 ##采用mschap-v2身份验证方式 require-mppe-128 ##在采用mschap-v2身份验证方式时要使用MPPE进行加密 ms-dns 192.168.0.107 ##给客户端分配DNS服务器地址 ms-dns 8.8.8.8 proxyarp ##启动ARP代理 debug	##开启调试模式，相关信息同样记录在 /var/logs/message 中。 lock	##锁定客户端 PTY 设备文件。 nobsdcomp	##禁用 BSD 压缩模式。 novj	novjccomp	##禁用 Van Jacobson 压缩模式。 nologfd	##禁止将错误信息记录到标准错误输出设备(stderr)  chap-secrets 也就是我们一会在windows上登陆时用到的帐号和密码</description>
     </item>
     
     <item>

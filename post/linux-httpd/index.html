@@ -64,7 +64,9 @@ cd .././apr-util-1.6.1 ./configure –prefix=/usr/local/src/apr-util –with-apr
         </div></div>
     </header>
     <div class="post-content">
-      <p>1 下载安装包</p>
+      
+
+<p>1 下载安装包</p>
 
 <pre><code>apr-1.7.0.tar.gz
 apr-util-1.6.1.tar.gz
@@ -126,28 +128,46 @@ make &amp;&amp; make install
 
 <p>9 编辑httpd的配置文件</p>
 
-<pre><code>vim /etc/httpd/httpd.conf
+<pre><code>vim /etc/httpd/conf/httpd.conf
 #ServerName www.example.com:80
 ServerName 172.0.0.1:80
 </code></pre>
 
-<p>10 添加apache的快捷方式</p>
+<p>10 运行httpd</p>
+
+<pre><code>server httpd start
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name,using localhost.localdomain. Set the 'ServerName' directive globally to suppress this message
+</code></pre>
+
+<h2 id="添加apache的快捷方式">添加apache的快捷方式</h2>
 
 <pre><code>cp /usr/local/src/apache2.4/bin/apachectl  /etc/init.d/httpd
 ln -s /etc/init.d/httpd /etc/rc.d/S85httpd
-</code></pre>
-
-<p>11 修改httpd</p>
-
-<pre><code> vim /etc/rc.d/init.d/httpd
+ vim /etc/rc.d/init.d/httpd
 # chkconfig: 345 85 15
 # description: Activates/Deactivates Apache Web Server
 </code></pre>
 
-<p>12 运行httpd</p>
+<h2 id="添加密码">添加密码</h2>
 
-<pre><code>server httpd start
-AH00558: httpd: Could not reliably determine the server's fully qualified domain name,using localhost.localdomain. Set the 'ServerName' directive globally to suppress this message
+<p>1 修改httpd.conf</p>
+
+<pre><code>vim /etc/httpd/conf/httpd.conf
+&lt;Virtualhost *:80&gt;
+	ServerName	www2.jiance.com
+	DocumentRoot	/var/www/html2
+	&lt;Directory &quot;/var/www/html2&quot;&gt;
+		AuthName	server-password
+		AuthType	basic
+		AuthUserfile	/etc/httpd/conf/.htpasswd
+		Require	valid-user
+	&lt;/Directory&gt;
+&lt;/Virtualhost&gt;
+</code></pre>
+
+<p>2 添加用户</p>
+
+<pre><code>htpasswd -mc /etc/httpd/conf/.htpasswd 用户
 </code></pre>
 
     </div>

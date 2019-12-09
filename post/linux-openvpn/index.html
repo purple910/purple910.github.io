@@ -12,10 +12,10 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux Openvpn"/>
-<meta name="twitter:description" content=" 软件安装 基本配置文件 生成服务端证书 生成客户端证书 证书整理 server.conf 密码验证脚本 pwd-file 防火墙 client.ovpn 连接 "/>
+<meta name="twitter:description" content="准备环境 1 主机ip:192.168.0.104 2 VPN服务器: ens32:192.168.0.107 ens33:127.16.1.10  软件安装 yum install -y openssl openssl-devel lzo lzo-devel pam pam-devel automake pkgconfig yum -y install openvpn easy-rsa ##配置阿里云的yum源 注：这里的easy-rsa是3.0版本的与2.0版本的配置有所区别  服务端基本配置文件 [root@localhost ~]# cp -r /usr/share/easy-rsa/ /etc/openvpn/easy-rsa [root@localhost ~]# cd /etc/openvpn/easy-rsa/ [root@localhost easy-rsa]# \rm 3 3.0 [root@localhost easy-rsa]# cd 3.0.6/ [root@localhost easy-rsa]# cp -r /usr/share/doc/easy-rsa-3.0.6/vars.example vars 注：若vars.example不在/usr/share/doc/easy-rsa-3.0.6里则可以通过查找文件 find / -type f -name &quot;vars.example&quot; | xargs -i cp {} . &amp;&amp; mv vars."/>
 
     <meta property="og:title" content="Linux Openvpn" />
-<meta property="og:description" content=" 软件安装 基本配置文件 生成服务端证书 生成客户端证书 证书整理 server.conf 密码验证脚本 pwd-file 防火墙 client.ovpn 连接 " />
+<meta property="og:description" content="准备环境 1 主机ip:192.168.0.104 2 VPN服务器: ens32:192.168.0.107 ens33:127.16.1.10  软件安装 yum install -y openssl openssl-devel lzo lzo-devel pam pam-devel automake pkgconfig yum -y install openvpn easy-rsa ##配置阿里云的yum源 注：这里的easy-rsa是3.0版本的与2.0版本的配置有所区别  服务端基本配置文件 [root@localhost ~]# cp -r /usr/share/easy-rsa/ /etc/openvpn/easy-rsa [root@localhost ~]# cd /etc/openvpn/easy-rsa/ [root@localhost easy-rsa]# \rm 3 3.0 [root@localhost easy-rsa]# cd 3.0.6/ [root@localhost easy-rsa]# cp -r /usr/share/doc/easy-rsa-3.0.6/vars.example vars 注：若vars.example不在/usr/share/doc/easy-rsa-3.0.6里则可以通过查找文件 find / -type f -name &quot;vars.example&quot; | xargs -i cp {} . &amp;&amp; mv vars." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://purple910.github.io/post/linux-openvpn/" />
 <meta property="article:published_time" content="2019-11-26T12:37:06&#43;08:00"/>
@@ -50,33 +50,315 @@
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          1 min read
+          5 min read
         </div></div>
     </header>
     <div class="post-content">
       
 
+<h1 id="准备环境">准备环境</h1>
+
+<pre><code>1 主机ip:192.168.0.104  
+2 VPN服务器:  
+    ens32:192.168.0.107  
+    ens33:127.16.1.10
+</code></pre>
+
 <h1 id="软件安装">软件安装</h1>
 
-<h1 id="基本配置文件">基本配置文件</h1>
+<pre><code>yum install -y openssl openssl-devel lzo lzo-devel pam pam-devel automake pkgconfig
+yum -y install openvpn easy-rsa  ##配置阿里云的yum源
+注：这里的easy-rsa是3.0版本的与2.0版本的配置有所区别
+</code></pre>
+
+<h1 id="服务端基本配置文件">服务端基本配置文件</h1>
+
+<pre><code>[root@localhost ~]# cp -r /usr/share/easy-rsa/ /etc/openvpn/easy-rsa
+[root@localhost ~]# cd /etc/openvpn/easy-rsa/
+[root@localhost easy-rsa]# \rm 3 3.0
+[root@localhost easy-rsa]# cd 3.0.6/
+[root@localhost easy-rsa]# cp -r /usr/share/doc/easy-rsa-3.0.6/vars.example vars
+注：若vars.example不在/usr/share/doc/easy-rsa-3.0.6里则可以通过查找文件
+    find / -type f -name &quot;vars.example&quot; | xargs -i cp {} . &amp;&amp; mv vars.example vars
+注：vars可以不用修改,若想修改则
+[root@localhost 3.0.6]# egrep '^set_var' vars  # 把下面几行解注释
+set_var EASYRSA_REQ_COUNTRY &quot;CN&quot;
+set_var EASYRSA_REQ_PROVINCE    &quot;California&quot;
+set_var EASYRSA_REQ_CITY    &quot;San Francisco&quot;
+set_var EASYRSA_REQ_ORG &quot;Copyleft Certificate Co&quot;
+set_var EASYRSA_REQ_EMAIL   &quot;me@example.net&quot;
+set_var EASYRSA_REQ_OU      &quot;My Organizational Unit&quot;
+</code></pre>
+
+<h1 id="创建一个新的-pki-和-ca">创建一个新的 PKI 和 CA</h1>
+
+<pre><code>[root@localhost 3.0.6]# pwd
+/etc/openvpn/easy-rsa/3.0.6
+[root@localhost 3.0.6]# ./easyrsa init-pki  #创建空的pki
+Note: using Easy-RSA configuration from: ./vars
+init-pki complete; you may now create a CA or requests.
+Your newly created PKI dir is: /etc/openvpn/easy-rsa/3.0.6/pki
+[root@localhost 3.0.6]# ./easyrsa build-ca nopass #创建新的CA，不使用密码
+......
+Common Name (eg: your user, host, or server name) [Easy-RSA CA]: *回车*
+CA creation complete and you may now import and sign cert requests.
+Your new CA certificate file for publishing is at:
+/etc/openvpn/easy-rsa/3.0.6/pki/ca.crt
+</code></pre>
 
 <h1 id="生成服务端证书">生成服务端证书</h1>
 
+<pre><code>[root@localhost 3.0.6]# ./easyrsa gen-req server nopass
+......
+Common Name (eg: your user, host, or server name) [server]: *回车*
+Keypair and certificate request completed. Your files are:
+req: /etc/openvpn/easy-rsa/3.0.6/pki/reqs/server.req
+key: /etc/openvpn/easy-rsa/3.0.6/pki/private/server.key
+</code></pre>
+
+<h1 id="签约服务端证书">签约服务端证书</h1>
+
+<pre><code>[root@localhost 3.0.6]# ./easyrsa sign server server
+......
+Type the word 'yes' to continue, or any other input to abort.
+  Confirm request details: *yes*
+Using configuration from ./openssl-1.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'server'
+Certificate is to be certified until Apr  7 14:54:08 2028 GMT (3650 days)
+Write out database with 1 new entries
+Data Base Updated
+Certificate created at: /etc/openvpn/easy-rsa/3.0.6/pki/issued/server.crt
+</code></pre>
+
+<h1 id="创建-diffie-hellman">创建 Diffie-Hellman</h1>
+
+<pre><code>[root@localhost 3.0.6]# ./easyrsa gen-dh
+......
+DH parameters of size 2048 created at /etc/openvpn/easy-rsa/3.0.6/pki/dh.pem
+</code></pre>
+
+<h1 id="客户端基本配置">客户端基本配置</h1>
+
+<pre><code>[root@localhost ~]# cp -r /usr/share/easy-rsa/ /etc/openvpn/client/easy-rsa
+[root@localhost ~]# cd /etc/openvpn/client/easy-rsa/
+[root@localhost easy-rsa]# \rm 3 3.0
+[root@localhost easy-rsa]# cd 3.0.6/
+[root@localhost 3.0.6]# cp -r /usr/share/doc/easy-rsa-3.0.6/vars.example vars
+</code></pre>
+
 <h1 id="生成客户端证书">生成客户端证书</h1>
+
+<pre><code>[root@localhost 3.0.6]# pwd
+/etc/openvpn/client/easy-rsa/3.0.6
+[root@localhost 3.06]# ./easyrsa init-pki #创建新的pki
+......
+init-pki complete; you may now create a CA or requests.
+Your newly created PKI dir is: /etc/openvpn/client/easy-rsa/3.0.6/pki
+[root@localhost 3.0.6]# ./easyrsa gen-req client nopass  #客户证书名为大林，木有密码
+......
+Common Name (eg: your user, host, or server name) [client]: *回车*
+Keypair and certificate request completed. Your files are:
+req: /etc/openvpn/client/easy-rsa/3.0.6/pki/reqs/client.req
+key: /etc/openvpn/client/easy-rsa/3.0.6/pki/private/client.key
+</code></pre>
+
+<h1 id="最后签约客户端证书">最后签约客户端证书</h1>
+
+<pre><code>[root@localhost 3.0.6]# cd /etc/openvpn/easy-rsa/3.0.6/
+[root@localhost 3.0.6]# pwd
+/etc/openvpn/easy-rsa/3.0.6
+[root@localhost 3.0.6]# ./easyrsa import-req /etc/openvpn/client/easy-rsa/3.0.6/pki/reqs/client.req client
+......
+The request has been successfully imported with a short name of: client
+You may now use this name to perform signing operations on this request.
+[root@localhost 3.0.6]# ./easyrsa sign client client
+......
+Type the word 'yes' to continue, or any other input to abort.
+  Confirm request details: *yes*
+Using configuration from ./openssl-1.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'client'
+Certificate is to be certified until Apr  8 01:54:57 2028 GMT (3650 days)
+Write out database with 1 new entries
+Data Base Updated
+Certificate created at: /etc/openvpn/easy-rsa/3.0.6/pki/issued/client.crt
+</code></pre>
 
 <h1 id="证书整理">证书整理</h1>
 
+<h2 id="服务端">服务端</h2>
+
+<pre><code>[root@localhost ~]# mkdir /etc/openvpn/certs
+[root@localhost ~]# cd /etc/openvpn/certs/  
+[root@localhost certs]# cp /etc/openvpn/easy-rsa/3.0.6/pki/dh.pem .        
+[root@localhost certs]# cp /etc/openvpn/easy-rsa/3.0.6/pki/ca.crt .
+[root@localhost certs]# cp /etc/openvpn/easy-rsa/3.0.6/pki/issued/server.crt .
+[root@localhost certs]# cp /etc/openvpn/easy-rsa/3.0.6/pki/private/server.key .
+[root@localhost certs]# ll
+总用量 20
+-rw-------. 1 root root 1172 4月  11 10:02 ca.crt
+-rw-------. 1 root root  424 4月  11 10:03 dh.pem
+-rw-------. 1 root root 4547 4月  11 10:03 server.crt
+-rw-------. 1 root root 1704 4月  11 10:02 server.key
+</code></pre>
+
+<h2 id="客户端">客户端</h2>
+
+<pre><code>[root@localhost certs]# mkdir /etc/openvpn/client/client/
+[root@localhost certs]# cp /etc/openvpn/easy-rsa/3.0.6/pki/ca.crt /etc/openvpn/client/client/
+[root@localhost certs]# cp /etc/openvpn/easy-rsa/3.0.6/pki/issued/client.crt /etc/openvpn/client/client/
+[root@localhost certs]# cp /etc/openvpn/client/easy-rsa/3.0.6/pki/private/client.key /etc/openvpn/client/client/
+[root@localhost certs]# ll /etc/openvpn/client/client/
+总用量 16
+-rw-------. 1 root root 1172 4月  11 10:07 ca.crt
+-rw-------. 1 root root 4431 4月  11 10:08 client.crt
+-rw-------. 1 root root 1704 4月  11 10:08 dali
+</code></pre>
+
 <h1 id="server-conf">server.conf</h1>
+
+<pre><code>cp /usr/share/doc/openvpn-2.4.7/sample/sample-config-files/server.conf /etc/openvpn/
+vim /etc/openvpn/server.conf
+# Sample Open××× 2.0
+port 1194
+proto udp
+dev tun
+ca /etc/openvpn/certs/ca.crt
+cert /etc/openvpn/certs/server.crt
+key /etc/openvpn/certs/server.key
+dh /etc/openvpn/certs/dh.pem
+auth SHA512
+topology subnet
+# 当重启OpenVPN时，再次连接的客户端将分配到与上一次分配相同的虚拟IP地址
+ifconfig-pool-persist /etc/openvpn/ipp.txt 
+# 设置服务器端模式，并提供一个VPN子网，以便于从中为客户端分配IP地址。
+# 在此处的示例中，服务器端自身将占用10.8.0.1，其他的将提供客户端使用。
+server 17.166.221.0 255.255.255.0
+# 推送路由信息到客户端，以允许客户端能够连接到服务器背后的其他私有子网。
+# (简而言之，就是允许客户端访问VPN服务器自身所在的其他局域网)
+push &quot;route 192.168.1.0 255.255.255.0&quot;
+push &quot;redirect-gateway def1 bypass-dhcp&quot;
+push &quot;dhcp-option DNS 223.5.5.5&quot;
+push &quot;dhcp-option DNS 223.6.6.6&quot;
+client-to-client   #多个终端可以互相访问
+keepalive 20 120
+cipher AES-256-CBC
+comp-lzo
+user nobody
+group nobody
+duplicate-cn
+tls-server
+remote-cert-tls client
+mode server
+status openvpn-status.log
+log-append  openvpn.log
+max-clients 100
+script-security 3
+auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
+username-as-common-name
+# 持久化选项可以尽量避免访问那些在重启之后由于用户权限降低而无法访问的某些资源。
+persist-key
+persist-tun
+status openvpn-status.log
+verb 3
+</code></pre>
 
 <h1 id="密码验证脚本">密码验证脚本</h1>
 
+<pre><code>#!/bin/sh
+PASSFILE=&quot;/etc/openvpn/psw-file&quot;
+LOG_FILE=&quot;/var/log/openvpn/openvpn-password.log&quot;
+TIME_STAMP=`date &quot;+%Y-%m-%d %T&quot;`
+ 
+if [ ! -r &quot;${PASSFILE}&quot; ]; then
+  echo &quot;${TIME_STAMP}: Could not open password file \&quot;${PASSFILE}\&quot; for reading.&quot; &gt;&gt; ${LOG_FILE}
+  exit 1
+fi
+ 
+CORRECT_PASSWORD=`awk '!/^;/&amp;&amp;!/^#/&amp;&amp;$1==&quot;'${username}'&quot;{print $2;exit}' ${PASSFILE}`
+ 
+if [ &quot;${CORRECT_PASSWORD}&quot; = &quot;&quot; ]; then
+  echo &quot;${TIME_STAMP}: User does not exist: username=\&quot;${username}\&quot;, password=\&quot;${password}\&quot;.&quot; &gt;&gt; ${LOG_FILE}
+  exit 1
+fi
+ 
+if [ &quot;${password}&quot; = &quot;${CORRECT_PASSWORD}&quot; ]; then
+  echo &quot;${TIME_STAMP}: Successful authentication: username=\&quot;${username}\&quot;.&quot; &gt;&gt; ${LOG_FILE}
+  exit 0
+fi
+ 
+echo &quot;${TIME_STAMP}: Incorrect password: username=\&quot;${username}\&quot;, password=\&quot;${password}\&quot;.&quot; &gt;&gt; ${LOG_FILE}
+exit 1
+chmod 755 /etc/openvpn/checkpsw.sh
+</code></pre>
+
 <h1 id="pwd-file">pwd-file</h1>
+
+<pre><code>echo &quot;testuser 123&quot; &gt; /etc/openvpn/psw-file
+chmod 644 /etc/openvpn/psw-file
+</code></pre>
+
+<h1 id="sysctl-conf">sysctl.conf</h1>
+
+<pre><code>net.ipv4.ip_forward = 1
+</code></pre>
 
 <h1 id="防火墙">防火墙</h1>
 
+<pre><code>iptables -t nat -A POSTROUTING -d 172.16.1.0/24 -j SNAT --to-source 172.16.1.10
+</code></pre>
+
 <h1 id="client-ovpn">client.ovpn</h1>
 
+<pre><code>client
+dev tun
+proto udp
+remote 192.168.0.107 1194
+resolv-retry infinite
+nobind
+auth-user-pass
+auth-nocache
+persist-key
+persist-tun
+tls-client
+remote-cert-tls server
+auth SHA512
+cipher AES-256-CBC
+comp-lzo
+setenv opt block-outside-dns
+key-direction 1
+verb 3
+
+ca ca.crt
+cert client.crt
+key client.key
+或者：
+&lt;ca&gt;
+   客户端ca.crt内容
+&lt;/ca&gt;
+&lt;cert&gt;
+   客户端client.crt内容
+&lt;/cert&gt;
+&lt;key&gt;
+   客户端client.key内容
+&lt;/key&gt;
+</code></pre>
+
 <h1 id="连接">连接</h1>
+
+<pre><code>1 将client.crt,client.key,ca.crt,ca.key 复制到主机
+2 安装openvpn https://www.techspot.com/downloads/5182-openvpn.html
+3 在openvpn的安装目录的config目录里创建一个文件
+4 将client.ovpn,client.crt,client.key,ca.crt,ca.key放在里面
+5 运行openvpn，连接client
+注：
+  如果一切配置都没问题,但无法连接,则需关闭本机的防火墙
+</code></pre>
 
     </div>
     <div class="post-footer">
