@@ -63,7 +63,9 @@ vim /etc/samba/smb.conf # max protocol = used to define the supported protocol. 
       <pubDate>Tue, 26 Nov 2019 12:36:58 +0800</pubDate>
       
       <guid>https://purple910.github.io/post/linux-l2tp/</guid>
-      <description>准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 modprobe ppp-compress-18 &amp;amp;&amp;amp; echo yes cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] [lns default] ip range = 172.16.1.100-172.16.1.199 local ip = 172.16.1.10 require chap = yes refuse pap = yes require authentication = yes name = LinuxVPNserver ppp debug = yes pppoptfile = /etc/ppp/options.</description>
+      <description>准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 先看看你的主机是否支持pptp，返回结果为yes就表示通过
+modprobe ppp-compress-18 &amp;amp;&amp;amp; echo yes  是否开启了TUN，有的虚拟机主机需要开启，返回结果为cat: /dev/net/tun: File descriptor in bad state。就表示通过。
+cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] ##全局选项 [lns default] ##设置我们要连接的lns的IP地址，或者dns 域名 ip range = 172.16.1.100-172.16.1.199 ##将会由LNS 分配LAC PPP 隧道的IP地址列 local ip = 172.16.1.10 ##被使用作为xl2tpd 自己的IP的地址。 require chap = yes ##拒绝或者要求，远程连接通过CHAP进行身份验证，以进行ppp身份验证 refuse pap = yes ##拒绝或者要求，远程连接通过PAP进行身份验证，以进行ppp身份验证。 require authentication = yes ##拒绝或者要求远程连接进行身份验证 name = LinuxVPNserver ppp debug = yes ##允许ppp debug pppoptfile = /etc/ppp/options.</description>
     </item>
     
     <item>

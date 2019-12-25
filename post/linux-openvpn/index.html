@@ -222,16 +222,16 @@ Certificate created at: /etc/openvpn/easy-rsa/3.0.6/pki/issued/client.crt
 
 <h1 id="server-conf">server.conf</h1>
 
-<pre><code>cp /usr/share/doc/openvpn-2.4.7/sample/sample-config-files/server.conf /etc/openvpn/
-vim /etc/openvpn/server.conf
+<pre><code>[root@localhost certs]# cp /usr/share/doc/openvpn-2.4.7/sample/sample-config-files/server.conf /etc/openvpn/
+[root@localhost certs]# vim /etc/openvpn/server.conf
 # Sample Open××× 2.0
-port 1194
-proto udp
-dev tun
-ca /etc/openvpn/certs/ca.crt
-cert /etc/openvpn/certs/server.crt
-key /etc/openvpn/certs/server.key
-dh /etc/openvpn/certs/dh.pem
+port 1194   ##监听哪个TCP/UDP端口
+proto udp   ##使用TCP还是UDP协议
+dev tun   ##创建的通信隧道类型(路由IP,以太网)
+ca /etc/openvpn/certs/ca.crt    ##根证书
+cert /etc/openvpn/certs/server.crt    
+key /etc/openvpn/certs/server.key   ##私钥
+dh /etc/openvpn/certs/dh.pem    ##密钥
 auth SHA512
 topology subnet
 # 当重启OpenVPN时，再次连接的客户端将分配到与上一次分配相同的虚拟IP地址
@@ -246,25 +246,26 @@ push &quot;redirect-gateway def1 bypass-dhcp&quot;
 push &quot;dhcp-option DNS 223.5.5.5&quot;
 push &quot;dhcp-option DNS 223.6.6.6&quot;
 client-to-client   #多个终端可以互相访问
-keepalive 20 120
-cipher AES-256-CBC
-comp-lzo
+keepalive 20 120    ##端每10秒钟ping客户端一次，如果120秒内都没有收到客户端的回复，则表示远程连接已经关闭。
+cipher AES-256-CBC    ##选择一个密码加密算法。
+comp-lzo    ##连接上启用压缩
+#在完成初始化工作之后，降低Open×××守护进程的权限提升安全性能
+#该指令仅限于非Windows系统中使用
 user nobody
 group nobody
 duplicate-cn
 tls-server
 remote-cert-tls client
-mode server
-status openvpn-status.log
-log-append  openvpn.log
-max-clients 100
+mode server   ##定义类型
+status openvpn-status.log   ##输出一个简短的状态文件，用于显示当前的连接状态，该文件每分钟都会清空并重写一次。
+log-append  openvpn.log   ##这是在之前的日志内容后进行追加
+max-clients 100   ##允许并发连接的客户端的最大数量
 script-security 3
 auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
 username-as-common-name
 # 持久化选项可以尽量避免访问那些在重启之后由于用户权限降低而无法访问的某些资源。
 persist-key
 persist-tun
-status openvpn-status.log
 verb 3
 </code></pre>
 

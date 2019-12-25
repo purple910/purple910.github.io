@@ -12,10 +12,14 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux L2tp"/>
-<meta name="twitter:description" content="准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 modprobe ppp-compress-18 &amp;&amp; echo yes cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] [lns default] ip range = 172.16.1.100-172.16.1.199 local ip = 172.16.1.10 require chap = yes refuse pap = yes require authentication = yes name = LinuxVPNserver ppp debug = yes pppoptfile = /etc/ppp/options."/>
+<meta name="twitter:description" content="准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 先看看你的主机是否支持pptp，返回结果为yes就表示通过
+modprobe ppp-compress-18 &amp;&amp; echo yes  是否开启了TUN，有的虚拟机主机需要开启，返回结果为cat: /dev/net/tun: File descriptor in bad state。就表示通过。
+cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] ##全局选项 [lns default] ##设置我们要连接的lns的IP地址，或者dns 域名 ip range = 172.16.1.100-172.16.1.199 ##将会由LNS 分配LAC PPP 隧道的IP地址列 local ip = 172.16.1.10 ##被使用作为xl2tpd 自己的IP的地址。 require chap = yes ##拒绝或者要求，远程连接通过CHAP进行身份验证，以进行ppp身份验证 refuse pap = yes ##拒绝或者要求，远程连接通过PAP进行身份验证，以进行ppp身份验证。 require authentication = yes ##拒绝或者要求远程连接进行身份验证 name = LinuxVPNserver ppp debug = yes ##允许ppp debug pppoptfile = /etc/ppp/options."/>
 
     <meta property="og:title" content="Linux L2tp" />
-<meta property="og:description" content="准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 modprobe ppp-compress-18 &amp;&amp; echo yes cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] [lns default] ip range = 172.16.1.100-172.16.1.199 local ip = 172.16.1.10 require chap = yes refuse pap = yes require authentication = yes name = LinuxVPNserver ppp debug = yes pppoptfile = /etc/ppp/options." />
+<meta property="og:description" content="准备环境 1 主机ip:192.168.0.107 2 VPN服务器: ens32:192.168.0.102 ens33:127.16.1.10  环境测试 先看看你的主机是否支持pptp，返回结果为yes就表示通过
+modprobe ppp-compress-18 &amp;&amp; echo yes  是否开启了TUN，有的虚拟机主机需要开启，返回结果为cat: /dev/net/tun: File descriptor in bad state。就表示通过。
+cat /dev/net/tun  软件安装 [root@localhost ~]# yum install -y xl2tpd libreswan lsof 注意：若无法安装xl2tp yum install -y epel-release  xl2tpd.conf [root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf [global] ##全局选项 [lns default] ##设置我们要连接的lns的IP地址，或者dns 域名 ip range = 172.16.1.100-172.16.1.199 ##将会由LNS 分配LAC PPP 隧道的IP地址列 local ip = 172.16.1.10 ##被使用作为xl2tpd 自己的IP的地址。 require chap = yes ##拒绝或者要求，远程连接通过CHAP进行身份验证，以进行ppp身份验证 refuse pap = yes ##拒绝或者要求，远程连接通过PAP进行身份验证，以进行ppp身份验证。 require authentication = yes ##拒绝或者要求远程连接进行身份验证 name = LinuxVPNserver ppp debug = yes ##允许ppp debug pppoptfile = /etc/ppp/options." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://purple910.github.io/post/linux-l2tp/" />
 <meta property="article:published_time" content="2019-11-26T12:36:58&#43;08:00"/>
@@ -66,9 +70,14 @@
 
 <h1 id="环境测试">环境测试</h1>
 
-<pre><code>modprobe ppp-compress-18 &amp;&amp; echo yes
-cat /dev/net/tun
+<p>先看看你的主机是否支持pptp，返回结果为yes就表示通过</p>
 
+<pre><code>modprobe ppp-compress-18 &amp;&amp; echo yes
+</code></pre>
+
+<p>是否开启了TUN，有的虚拟机主机需要开启，返回结果为cat: /dev/net/tun: File descriptor in bad state。就表示通过。</p>
+
+<pre><code>cat /dev/net/tun
 </code></pre>
 
 <h1 id="软件安装">软件安装</h1>
@@ -81,17 +90,17 @@ cat /dev/net/tun
 <h1 id="xl2tpd-conf">xl2tpd.conf</h1>
 
 <pre><code>[root@localhost ~]# vim /etc/xl2tpd/xl2tpd.conf
-[global]
-[lns default]
-ip range = 172.16.1.100-172.16.1.199
-local ip = 172.16.1.10
-require chap = yes
-refuse pap = yes
-require authentication = yes
+[global]        ##全局选项
+[lns default]       ##设置我们要连接的lns的IP地址，或者dns 域名
+ip range = 172.16.1.100-172.16.1.199        ##将会由LNS 分配LAC PPP 隧道的IP地址列
+local ip = 172.16.1.10      ##被使用作为xl2tpd 自己的IP的地址。
+require chap = yes      ##拒绝或者要求，远程连接通过CHAP进行身份验证，以进行ppp身份验证
+refuse pap = yes        ##拒绝或者要求，远程连接通过PAP进行身份验证，以进行ppp身份验证。
+require authentication = yes        ##拒绝或者要求远程连接进行身份验证
 name = LinuxVPNserver
-ppp debug = yes
+ppp debug = yes     ##允许ppp debug
 pppoptfile = /etc/ppp/options.xl2tpd
-length bit = yes
+length bit = yes        ##如果这个设置为yes ，那么将会使用l2tp 数据包有效载荷中的长度位
 </code></pre>
 
 <h1 id="options-xl2tpd">options.xl2tpd</h1>
@@ -129,7 +138,7 @@ logfile /var/log/xl2tpd.log
 config setup
 	  protostack=netkey
         dumpdir=/var/run/pluto/		
-			 	virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v4:100.64.0.0/10,%v6:fd00::/8,%v6:fe80::/10
+			 	virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:25.0.0.0/8,%v4:100.64.0.0/10,%v6:fd00::/8,%v6:fe80::/10     ## # 主要指定拨号分配给客户端的私有地址
 include /etc/ipsec.d/*.conf
 </code></pre>
 
