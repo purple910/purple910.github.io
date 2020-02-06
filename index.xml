@@ -6,10 +6,27 @@
     <description>Recent content on purple910</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Nov 2019 21:29:57 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Feb 2020 16:46:56 +0800</lastBuildDate>
     
 	<atom:link href="https://purple910.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python Download Image</title>
+      <link>https://purple910.github.io/post/python-dewnload-image/</link>
+      <pubDate>Thu, 06 Feb 2020 16:46:56 +0800</pubDate>
+      
+      <guid>https://purple910.github.io/post/python-dewnload-image/</guid>
+      <description>环境准备 1 python + requests + BeautifulSoup
+页面准备 主页面:
+http://www.netbian.com/dongman/  图片伪地址:
+http://www.netbian.com/desk/22371.htm  图片真实地址:
+http://img.netbian.com/file/2019/1221/36eb674ba0633d185da078804a3638e6.jpg  步骤 1 导入库
+import requests from bs4 import BeautifulSoup import re  2 更改请求头
+ua = &amp;quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0&amp;quot;  3 获取主页面的内容
+response = requests.get(url, headers={&#39;User-Agent&#39;: ua}) html = response.text soup = BeautifulSoup(html, &#39;html.parser&#39;)  4 获取图片的a标签的地址(若时获取img里的地址其大小为 800*450,而我们要的时壁纸)
+list = soup.find(name=&#39;div&#39;, attrs=&#39;list&#39;) for li in list.find_all(&#39;li&#39;): # print(img.</description>
+    </item>
     
     <item>
       <title>Linux Dns</title>
