@@ -1,11 +1,3 @@
-* app
-  * [Janus编译文档](app/Janus编译文档.md)
-  * [Janus视屏会议接口文档](app/Janus视屏会议接口文档.md)
-  * [licence-tool](app/licence-tool.md)
-  * [onlyoffice（社区版）使用示例](app/onlyoffice（社区版）使用示例.md)
-  * [流媒体组件功能对接手册](app/流媒体组件功能对接手册.md)
-
-
 * elasticsearch
   * [elasticsearch的查询数大于10000查询失败](elasticsearch/elasticsearch的查询数大于10000查询失败.md)
   * [esrally对elasticsearch进行压力测试](elasticsearch/esrally对elasticsearch进行压力测试.md)
