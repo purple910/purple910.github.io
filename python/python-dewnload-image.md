@@ -1,8 +1,3 @@
----
-title: "Python Download Image"
-date: 2020-02-06T16:46:56+08:00
-draft: true
----
 
 ## 环境准备  
 1 python + requests + BeautifulSoup

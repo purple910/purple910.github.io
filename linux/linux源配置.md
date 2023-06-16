@@ -1,7 +1,6 @@
 # linux源配置
 
 
-
 ## CentOS-7
 ```
 [aliyun-base]

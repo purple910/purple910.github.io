@@ -1,9 +1,3 @@
----
-title: "Linux Basic"
-date: 2019-08-28T16:18:20+08:00
-draft: true
----
-
 
 # 控制进程和守护服务
 ```
@@ -38,12 +32,4 @@ hostnamectl localhost
 //配置网关别名
 echo "192.168.0.254  www.fate.com">>/etc/hosts
 ```
-
-
-# 配置链路聚合和桥接
-```
-
-```
-
-
 

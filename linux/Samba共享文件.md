@@ -1,8 +1,3 @@
----
-title: "Linux Samba共享文件"
-date: 2019-11-26T16:44:32+08:00
-draft: true
----
 
 
 1 安装samba
