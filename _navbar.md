@@ -5,18 +5,16 @@
 
 
 * linux
-  * [linux-basic](linux/linux-basic.md)
-  * [linux-demo](linux/linux-demo.md)
-  * [linux-directive](linux/linux-directive.md)
-  * [linux-dns](linux/linux-dns.md)
-  * [linux-error](linux/linux-error.md)
-  * [linux-httpd](linux/linux-httpd.md)
-  * [linux-l2tp](linux/linux-l2tp.md)
-  * [linux-openvpn](linux/linux-openvpn.md)
-  * [linux-pptpd](linux/linux-pptpd.md)
-  * [linux-samba](linux/linux-samba.md)
-  * [linux-shell](linux/linux-shell.md)
+  * [Apache源码安装](linux/Apache源码安装.md)
+  * [L2tp配置](linux/L2tp配置.md)
+  * [linux基础命令](linux/linux基础命令.md)
+  * [linux指令操作](linux/linux指令操作.md)
   * [linux源配置](linux/linux源配置.md)
+  * [linux重置密码](linux/linux重置密码.md)
+  * [Openvpn配置](linux/Openvpn配置.md)
+  * [Pptpd配置](linux/Pptpd配置.md)
+  * [Samba共享文件](linux/Samba共享文件.md)
+  * [shell脚本](linux/shell脚本.md)
 
 
 * nginx
